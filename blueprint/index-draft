@@ -4,7 +4,7 @@ author:
 indextype: blueprint
 icon: blueprint
 image: images/banner.png
-category: 4
+category: 11
 summary: |
 BirchAI introduces Birch Assist to help automate the complex after-call-work using our own state-of-the-art AI tools. We offer variety of options including Live Call Analytics - Task Tracking, Sentiment Tracking, Fields Extraction, Pacing guidance among others and After Call Work that involves summary, call reason, call classification. 
 ---
@@ -15,23 +15,38 @@ For more information and how to setup Birch Assist for your organization within 
 
 ![Birch Assist Integration](images/genesys_birchai_workflow.png "Birch Assist Integration Overview")
 
-## Solution components
-### Genesys Cloud
-A suite of Genesys cloud services for enterprise-grade communications, collaboration, and contact center management.
+## Scenario
 
-### Genesys AppFoundry
-The Genesys app marketplace for solutions that run on the Genesys Cloud platform. You download the integration used in this solution from the Genesys AppFoundry.
+An organization wants to significantly reduce average handle time by automating the generation of draft after call summaries and call classifications.
+
+1.	The agent interacts with the caller on the phone to understand and resolve a customer issue.
+
+2.	The call ends. In the organizations CRM system, the agent documents the purpose of the customer’s call, the actions taken by the agent to resolve the issue, and any next steps.
+
+3.	The agent closes the interaction in the CRM system and re-enters the call queue.
+
+
+## Solution components
+
+* **Genesys Cloud CX** - A suite of Genesys Cloud services for enterprise-grade communications, collaboration, and contact center management. In this solution, you use the Genesys Cloud CX audio stream function.
+* **BirchAssist** – BirchAssist is a pre-trained generative AI model that can be fine-tuned to automatically generate call summaries and classifications that emulate and even improve on the style and quality of an organization’s existing documentation, for essentially any use case. Sample use cases include medical device customer service, payer and provider clinical prior authorization calls, frontline health or life insurance calls, banking, utility, and telecom customer service calls. 
+* **Customer CRM** – The call summaries and classifications that BirchAssist autogenerates are typically fed via two-way API to the organization’s CRM system. Agents review the auto-generated data, make any required edits, and BirchAssist captures the diff file to enhance future model retraining on behalf of the organization. 
+* **BirchAI services** – Most use cases require s small amount of configuration to emulate the organization’s desired summary language and style, and to integrate into the organization’s downstream CRM system
+
+## Prerequisites
+
+### Specialized knowledge
+* Administrator-level knowledge of Genesys Cloud  
+* Experience using the Genesys Cloud OAuth Process for third party apps
+
+### Genesys Cloud account
+A suite of Genesys cloud services for enterprise-grade communications, collaboration, and contact center management.
 
 ### BirchAI Account
 You would need an active BirchAI account.
 
 ### AudioHook integration
 For the live call streams - audio hook integration is required. 
-
-### Specialized knowledge
-Administrator-level knowledge of Genesys Cloud  
-Experience using the Genesys Cloud OAuth Process for third party apps
-
 
 ## Deployment Steps
 
