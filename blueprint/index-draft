@@ -6,81 +6,95 @@ icon: blueprint
 image: images/banner.png
 category: 11
 summary: |
-BirchAI introduces Birch Assist to help automate the complex after-call-work using our own state-of-the-art AI tools. We offer variety of options including Live Call Analytics - Task Tracking, Sentiment Tracking, Fields Extraction, Pacing guidance among others and After Call Work that involves summary, call reason, call classification. 
+In this Genesys Cloud Developer Blueprint, Birch AI is used to automate complex after-call tasks. Our Live Call Analytics includes Task Tracking, Sentiment Tracking, Field Extraction, Pacing guidance, among others, as well as After-Call Work that includes summaries, reasons for the call, and classifications. 
 ---
 
-BirchAI introduces Birch Assist to help automate the complex after-call-work using our own state-of-the-art AI tools. We offer variety of options including **Live Call Analytics** - Task Tracking, Sentiment Tracking, Fields Extraction, Pacing guidance among others and **After Call Work** that involves summary, call reason, call classification. 
+:::{"alert":"primary","title":"About Genesys Cloud Blueprints","autoCollapse":false} 
+Genesys Cloud blueprints were built to help you jump-start building an application or integrating with a third-party partner. 
+Blueprints are meant to outline how to build and deploy your solutions, not a production-ready turn-key solution.
+ 
+For more details on Genesys Cloud blueprint support and practices, 
+see our Genesys Cloud blueprint [FAQ](https://developer.genesys.cloud/blueprints/faq "Goes to the Genesys Cloud Blueprint FAQ page") sheet.
+:::
 
-For more information and how to setup Birch Assist for your organization within the Genesys Cloud, contact us [here](https://birch.ai/#footerscroll).
+In this Genesys Cloud Developer Blueprint, Birch AI is used to automate complex after-call tasks. Our **Live Call Analytics** includes Task Tracking, Sentiment Tracking, Field Extraction, Pacing guidance, among others, as well as **After-Call Work** that includes summaries, reasons for the call, and classifications. 
+
+For more information about Birch Assist setup, contact us [here](https://birch.ai/#footerscroll).
 
 ![Birch Assist Integration](images/genesys_birchai_workflow.png "Birch Assist Integration Overview")
 
 ## Scenario
 
-An organization wants to significantly reduce average handle time by automating the generation of draft after call summaries and call classifications.
+A company wants to reduce handling time by automating the generation of draft after-call summaries and call classifications in the following ways:
 
-1.	The agent interacts with the caller on the phone to understand and resolve a customer issue.
+- The agent interacts with the caller to understand and resolve customer issues.
 
-2.	The call ends. In the organizations CRM system, the agent documents the purpose of the customer’s call, the actions taken by the agent to resolve the issue, and any next steps.
+- The call has ended. Using the organization's CRM system, the agent documents the customer's call and its purpose, the steps taken by the agent to resolve the problem, and any next steps.
 
-3.	The agent closes the interaction in the CRM system and re-enters the call queue.
-
+- A CRM interaction is closed and the agent returns to the call queue.
 
 ## Solution components
 
 * **Genesys Cloud CX** - A suite of Genesys Cloud services for enterprise-grade communications, collaboration, and contact center management. In this solution, you use the Genesys Cloud CX audio stream function.
-* **BirchAssist** – BirchAssist is a pre-trained generative AI model that can be fine-tuned to automatically generate call summaries and classifications that emulate and even improve on the style and quality of an organization’s existing documentation, for essentially any use case. Sample use cases include medical device customer service, payer and provider clinical prior authorization calls, frontline health or life insurance calls, banking, utility, and telecom customer service calls. 
-* **Customer CRM** – The call summaries and classifications that BirchAssist autogenerates are typically fed via two-way API to the organization’s CRM system. Agents review the auto-generated data, make any required edits, and BirchAssist captures the diff file to enhance future model retraining on behalf of the organization. 
-* **BirchAI services** – Most use cases require s small amount of configuration to emulate the organization’s desired summary language and style, and to integrate into the organization’s downstream CRM system
+* **BirchAssist** – A pre-trained generative AI model, BirchAssist automatically generates call summaries and classifications based on the style and quality of an organization’s existing documentation. It can be fine-tuned to meet virtually any organization’s needs. Medical device customer service, payers and providers clinical authorization calls, frontline health or life insurance customer service, and banking, utility, and telecommunications customer service are examples of use cases. 
+* **Customer CRM** – BirchAssist automatically generates call summaries and classifications that are fed to the organization's CRM system via a two-way API. The BirchAssist agents review the auto-generated data, make necessary edits, and then BirchAssist captures the diff file for future model retraining. 
+* **BirchAI services** – Most use cases require a small amount of configuration to emulate the organization’s desired summary language and style. Configuring this configuration is necessary to ensure that the downstream CRM system functions.
 
 ## Prerequisites
 
 ### Specialized knowledge
+
 * Administrator-level knowledge of Genesys Cloud  
 * Experience using the Genesys Cloud OAuth Process for third party apps
 
 ### Genesys Cloud account
+
 A suite of Genesys cloud services for enterprise-grade communications, collaboration, and contact center management.
 
-### BirchAI Account
-You would need an active BirchAI account.
+### BirchAI account
+
+You need a BirchAI account to use the service.
 
 ### AudioHook integration
-For the live call streams - audio hook integration is required. 
 
-## Deployment Steps
+Live call streams require audio hook integration. 
 
-The Birch AI integration has the following steps:
+## Deployment steps
 
-* Create a custom role for Birch Assist
-* Create a Client Credentials OAuth Client for Birch in the Genesys Cloud
-* Setup AudioHook integration for your organization
-* Contact Birch to link AudioHook to Birch Assist
+The following steps are involved in Birch AI integration:
+
+1. Create a custom Birch Assist role.
+2. Create a Genesys Cloud Credentials OAuth Client for Birch. 
+3. Set up your organization's integration with AudioHook. 
+4. Contact Birch to link AudioHook to Birch Assist.
 
 ### Create a custom role for Birch Assist
-1. Login to your Genesys Cloud organization and [create a new role](https://help.mypurecloud.com/articles/add-roles/) with the following permissions:
 
-    * Analytics  Agent Conversation Detail  View
-    * Analytics  Conversation Detail  View
-    * Authorization  Role  View
-    * OAuth  Client  View
-    * Integrations  Integration  Edit
+1. Log into your Genesys Cloud organization and [Add roles](https://help.mypurecloud.com/articles/add-roles/ "Goes to the Add roles article") with the following permissions:
+
+    * Analytics Agent Conversation Detail View
+    * Analytics Conversation Detail View
+    * Authorization Role View
+    * OAuth Client View
+    * Integrations Integration Edit
 
 2. Assign the role to yourself
 
 ### Create a Client Credentials OAuth Client
-1. Login to your Genesys Cloud organization and [create a Client Credentials OAuth Client](https://help.mypurecloud.com/articles/create-an-oauth-client/)
-2. Select Client Credentials in the Grant Types and click the Roles tab
-3. Assign the custom role created above to the OAuth Client and save
-4. Note the Client ID and the Client Secret
 
-### Setup the AudioHook Integration
-1. Setup the AudioHook integration for your Genesys Cloud organization (skip if you already have AudioHook setup)
+1. Log in to your Genesys Cloud organization and [Create a Client Credentials OAuth Client](https://help.mypurecloud.com/articles/create-an-oauth-client/ "Goes to Create an OAuth client page").
+2. In the Grant Types section, click on Client Credentials, and then the Roles tab.
+3. Create the custom role and save it in the OAuth client.
+4. Make a note of the Client ID and Client Secret.
 
-### Contact Birch
-1. Share the Client ID and Client Secret for the OAuth Client with the Birch Team.
-2. Once AudioHook is setup, we will provide you with a Connection URI to configure AudioHook to start streaming live audio to Birch.
+:::primary
+**Note:
+If you have already set up AudioHook for your Genesys Cloud organization, skip this step.
+:::
+
+### Contact Birch team
+1. You need to share the Client ID and Client Secret for the OAuth Client with the Birch Team.
+2. You will be provided with a Connection URI once AudioHook is set up and ready to stream live audio.
 
 
-
-For any questions regarding the setup process, please contact us here - demo@birch.ai
+Contact demo@birch.ai with questions regarding setup.
