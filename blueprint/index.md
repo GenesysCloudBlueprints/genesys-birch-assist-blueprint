@@ -6,7 +6,7 @@ icon: blueprint
 image: images/banner.png
 category: 11
 summary: |
-In this Genesys Cloud Developer Blueprint, Birch AI is used to automate complex after-call tasks. Our Live Call Analytics includes Task Tracking, Sentiment Tracking, Field Extraction, Pacing guidance, among others, as well as After-Call Work that includes summaries, reasons for the call, and classifications. 
+  In this Genesys Cloud Developer Blueprint, Birch AI is used to automate complex after-call tasks. Our Live Call Analytics includes Task Tracking, Sentiment Tracking, Field Extraction, Pacing guidance, among others, as well as After-Call Work that includes summaries, reasons for the call, and classifications. 
 ---
 
 :::{"alert":"primary","title":"About Genesys Cloud Blueprints","autoCollapse":false} 
